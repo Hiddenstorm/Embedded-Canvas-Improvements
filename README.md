@@ -5,7 +5,7 @@ This Obsidian Plugin improves the way that canvases are embedded as the name alr
 Heres an example of the plugin: 
 ![alt text](example.png)
 
-## Exclamer
+## Exclaimer
 Let me know if you want anything added but keep in mind that this is the first time I've used typescript or javascript for that matter so don't be surprised if the code is a bit wonky. Also I haven't tested it on mobile yet.
 
 ## Why?

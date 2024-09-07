@@ -12,7 +12,8 @@ export default class CanvasPlugin extends Plugin {
         
         // reading mode or rendering for html / pdf
         // goes through each markdown block to check if theres an embed present
-        this.registerMarkdownPostProcessor((element, context) => {
+        // Could be useful but the other observer events are sufficent enough for now and render it right every time
+        /*this.registerMarkdownPostProcessor((element, context) => {
 
             const elements = element.querySelectorAll(".internal-embed");
 
@@ -24,7 +25,7 @@ export default class CanvasPlugin extends Plugin {
                     }
             });
 
-        })
+        })*/
 
         const observer = new MutationObserver((mutationsList) => {
             mutationsList.forEach((mutation) => {
