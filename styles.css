@@ -1,8 +1,23 @@
-/*
+.Canvas-embed-text {
+    color: var(--text-normal);
+    font-size: var(--font-text-size);
+    overflow-wrap: break-word;
+    font-family: var(--font-text);
+    margin: 7px 14px 7px 14px;
+    text-align: center;
+    overflow-y: auto; /* Enable scrolling */
+    height: 100%;
+    padding-bottom: 14px;
+    display: block;
 
-This CSS file will be included with your plugin, and
-available in the app when your plugin is enabled.
+    /* Adjust line-height for single-line text vertical alignment */
+}
 
-If your plugin does not need CSS, delete this file.
 
-*/
+.Canvas-embed-text.single-line {
+    display: flex; /* Flexbox for single-line centering */
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+

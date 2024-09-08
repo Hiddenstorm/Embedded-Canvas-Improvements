@@ -120,22 +120,31 @@ function manipulateEmbed(embed: Element){
                         const group = minimap.createSvg("g")
                         
                         group.appendChild(rect)
+                        
+                        // use foreign object wrapper to render <p>
+                        const wrapper = group.createSvg("foreignObject");
 
-                        const text = group.createSvg("text")
+                        const text = wrapper.createEl("p")
                         text.setText(canvasjson["nodes"][i].text)
+                        text.addClass("Canvas-embed-text")
 
-                        text.setAttribute("x", (rect.x.baseVal.value + rect.width.baseVal.value/2).toString())
-                        // Text weirdly offset so +3 should fix for now
-                        text.setAttribute("y", ((rect.y.baseVal.value + rect.height.baseVal.value/2) + 3).toString())
-                        text.setAttribute("text-anchor", "middle")
-                        text.setAttribute("dominant-baseline", "middle")
+                        wrapper.setAttribute("width", rect.width.baseVal.valueAsString)
+                        wrapper.setAttribute("height", rect.height.baseVal.valueAsString)
+                        wrapper.setAttribute("x", rect.x.baseVal.value.toString())
+                        wrapper.setAttribute("y", rect.y.baseVal.value.toString())
+                        
+                        // Check if its a single line to align it vertically
+                        if(text.scrollHeight <= parseInt(getComputedStyle(text).height)){
+                            console.log("Adinng class")
+                            text.addClass("single-line")
+                        }
 
                         // css variables dont work on svg elements such as <text> so render it with the css markdown-preview-view class
                         // to get the theme variables and add them as svg ones
-                        text.addClass("markdown-preview-view")
+                        /*text.addClass("markdown-preview-view")
                         text.setAttribute("fill", getComputedStyle(text).getPropertyValue("color"))
                         text.setAttribute("font-family", getComputedStyle(text).getPropertyValue("font-family"))
-                        text.setAttribute("font-size", getComputedStyle(text).getPropertyValue("font-size"))
+                        text.setAttribute("font-size", getComputedStyle(text).getPropertyValue("font-size"))*/
                         
                     }
                 
