@@ -1,23 +1,50 @@
 .Canvas-embed-text {
+    
     color: var(--text-normal);
     font-size: var(--font-text-size);
     overflow-wrap: break-word;
     font-family: var(--font-text);
-    margin: 7px 14px 7px 14px;
+
+    margin: 7px 14px 7px 14px !important;
     text-align: center;
     overflow-y: auto; /* Enable scrolling */
     height: 100%;
     padding-bottom: 14px;
     display: block;
-
-    /* Adjust line-height for single-line text vertical alignment */
+    scale: inherit;
 }
 
 
 .Canvas-embed-text.single-line {
+    padding-bottom: 0;
+    margin-block-end: 0 !important;
+    margin-block-start: 0 !important;
     display: flex; /* Flexbox for single-line centering */
     align-items: center;
     justify-content: center;
     height: 100%;
 }
 
+.canvas-node-magnify{
+    scale: 100%;
+}
+
+.canvas-node-magnify:hover{
+
+    z-index: 5;
+
+    scale: 150%;
+    transform-origin: 0;
+    transform-box: fill-box;
+}
+
+.canvas-node-magnify:hover > .canvas-node-bubble{
+    
+    fill-opacity: 80%;
+
+    /*stroke: black;
+    stroke-width: 5px;
+    rx: 20px;
+    ry: 20px;*/
+
+}

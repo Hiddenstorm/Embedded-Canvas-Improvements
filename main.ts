@@ -13,19 +13,7 @@ export default class CanvasPlugin extends Plugin {
         // reading mode or rendering for html / pdf
         // goes through each markdown block to check if theres an embed present
         // Could be useful but the other observer events are sufficent enough for now and render it right every time
-        /*this.registerMarkdownPostProcessor((element, context) => {
-
-            const elements = element.querySelectorAll(".internal-embed");
-
-            elements.forEach(element => {
-                const linkSource = element.getAttribute('src');
-                    if (linkSource && linkSource.endsWith('.canvas')) {
-                        console.log("Canvas embedded:", linkSource);
-                        // add text
-                    }
-            });
-
-        })*/
+        // this.registerMarkdownPostProcessor((element, context) => {return})
 
         const observer = new MutationObserver((mutationsList) => {
             mutationsList.forEach((mutation) => {
@@ -49,7 +37,7 @@ export default class CanvasPlugin extends Plugin {
                             if (node.classList.contains("internal-embed")) {
                                 const linkSource = node.getAttribute('src');
                                 if (linkSource && linkSource.endsWith('.canvas')) {
-                                    console.log("vhbaskhgasvdf")
+
                                     manipulateEmbed(node)
 
                                 }
@@ -115,9 +103,11 @@ function manipulateEmbed(embed: Element){
 
                     for (let i = 0; i < rects.length; i++) {
                         const rect = rects[i];
+                        rect.addClass("canvas-node-bubble")
                         
                         const minimap : SVGElement = (rect.parentElement as SVGElement & HTMLElement)
                         const group = minimap.createSvg("g")
+                        group.addClass("canvas-node-magnify")
                         
                         group.appendChild(rect)
                         
@@ -135,16 +125,8 @@ function manipulateEmbed(embed: Element){
                         
                         // Check if its a single line to align it vertically
                         if(text.scrollHeight <= parseInt(getComputedStyle(text).height)){
-                            console.log("Adinng class")
                             text.addClass("single-line")
                         }
-
-                        // css variables dont work on svg elements such as <text> so render it with the css markdown-preview-view class
-                        // to get the theme variables and add them as svg ones
-                        /*text.addClass("markdown-preview-view")
-                        text.setAttribute("fill", getComputedStyle(text).getPropertyValue("color"))
-                        text.setAttribute("font-family", getComputedStyle(text).getPropertyValue("font-family"))
-                        text.setAttribute("font-size", getComputedStyle(text).getPropertyValue("font-size"))*/
                         
                     }
                 
