@@ -1,15 +1,31 @@
-import { Plugin, TFile } from 'obsidian';
+import { Plugin, TFile, Setting } from 'obsidian';
+
+interface Settings{
+
+    extendScrollableNodes: boolean;
+
+}
+const DEFAULT: Settings = {
+
+    extendScrollableNodes: true
+
+}
 
 export default class CanvasPlugin extends Plugin {
-    
-    // Will add function to zoom into bubbles on hover
+    settings: Settings
+
+    // make paths beneath not visible as it scales down
+
     // image support
-    // include paths
+    // include path arrows
+
 
     async onload() {
 
-        console.log('Loading canvas plugin');
         
+
+        console.log('Loading canvas plugin');
+
         // reading mode or rendering for html / pdf
         // goes through each markdown block to check if theres an embed present
         // Could be useful but the other observer events are sufficent enough for now and render it right every time
@@ -108,8 +124,17 @@ function manipulateEmbed(embed: Element){
                         const minimap : SVGElement = (rect.parentElement as SVGElement & HTMLElement)
                         const group = minimap.createSvg("g")
                         group.addClass("canvas-node-magnify")
-                        
+
                         group.appendChild(rect)
+
+                        group.addEventListener("mouseenter", ()=>{
+                            //group.parentNode?.appendChild(group)
+                            //requestAnimationFrame(()=>requestAnimationFrame(()=>{
+                                group.parentNode?.insertBefore(group, null)
+                                
+                            //}))
+                            //rect.setAttribute("stroke", rect.getAttribute("fill").)
+                        })
                         
                         // use foreign object wrapper to render <p>
                         const wrapper = group.createSvg("foreignObject");
@@ -126,6 +151,9 @@ function manipulateEmbed(embed: Element){
                         // Check if its a single line to align it vertically
                         if(text.scrollHeight <= parseInt(getComputedStyle(text).height)){
                             text.addClass("single-line")
+                        }
+                        else{
+                            text.addClass("multi-line")
                         }
                         
                     }
