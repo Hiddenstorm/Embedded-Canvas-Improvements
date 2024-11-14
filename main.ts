@@ -1,19 +1,7 @@
-import { Plugin, TFile, Setting } from 'obsidian';
-
-interface Settings{
-
-    extendScrollableNodes: boolean;
-
-}
-const DEFAULT: Settings = {
-
-    extendScrollableNodes: true
-
-}
+import { Plugin, TFile } from 'obsidian';
 
 export default class CanvasPlugin extends Plugin {
-    settings: Settings
-
+    
     // make paths beneath not visible as it scales down
 
     // image support
@@ -21,8 +9,6 @@ export default class CanvasPlugin extends Plugin {
 
 
     async onload() {
-
-        
 
         console.log('Loading canvas plugin');
 
